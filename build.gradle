@@ -18,8 +18,9 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.h2database:h2:2.2.224'
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.batch:spring-batch-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
