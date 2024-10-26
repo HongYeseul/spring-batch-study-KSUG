@@ -1,8 +1,11 @@
-Alice	30	F
-Bob	45	M
-Charlie	25	M
-Diana	29	F
-Evan	35	M
-Fiona	40	F
-George	55	M
-Hannah	32	F
+ID	AGE
+Alice	30
+Bob	45
+Charlie	25
+Diana	29
+Evan	35
+Fiona	40
+George	55
+Hannah	32
+총 고객 수: 8
+총 나이: 291
