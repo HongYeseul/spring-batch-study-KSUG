@@ -1,5 +1,6 @@
-package com.example.batch_sample.jobs.task05;
+package com.example.batch_sample.jobs.task05.reader;
 
+import com.example.batch_sample.jobs.task05.Customer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
