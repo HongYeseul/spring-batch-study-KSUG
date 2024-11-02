@@ -80,7 +80,7 @@ public class JdbcPagingReaderJobConfig {
     public FlatFileItemWriter<Customer> customerFlatFileItemWriter() {
         return new FlatFileItemWriterBuilder<Customer>()
                 .name("customerFlatFileItemWriter")
-                .resource(new FileSystemResource("./output/customer_new_v1.csv"))
+                .resource(new FileSystemResource("./output/task05-JdbcPagingReader.csv"))
                 .encoding(ENCODING)
                 .delimited().delimiter("\t")
                 .names("name", "age", "gender")
