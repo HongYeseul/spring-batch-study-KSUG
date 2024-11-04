@@ -7,3 +7,7 @@
 - 파일 인코딩을 EUC-KR으로 설정하여 읽어 들인다.
 - ItemProcess를 구현하여 전월대비 비율을 구하고, 값을 변경한다. 
 - FlatFileItemWriter을 이용하여 전월대비 비율값을 포함한 리포트 문서를 csv파일로 작성한다.
+
+## 참고 
+
+- [KIDO님 실습 코드 샘플](https://github.com/schooldevops/spring-batch-tutorials/tree/11.Quiz/11.01.Quiz_Flatfile)
