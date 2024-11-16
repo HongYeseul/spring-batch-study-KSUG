@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace: XML Mapper 파일의 식별자, 쿼리들을 그룹화 해서 모아놓은 이름 공간-->
+<mapper namespace="batch_sample.jobs">
+
+    <resultMap id="customerResult" type="com.example.batch_sample.jobs.task06.Customer">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+    </resultMap>
+
+    <!-- resultMap: 결과로 반환할 결과맵. db column과 java field 이름 매핑   -->
+    <select id="selectCustomers" resultMap="customerResult">
+--         쿼리 지정
+        SELECT id, name, age, gender
+        FROM customer
+                 LIMIT #{_skiprows}, #{_pagesize}
+--         _skiprows: 오프셋. 쿼리 별과에서 얼마나 스킵할지 지정. pageSize를 지정했다면 자동으로 계산 됨
+--         _pagesize: 한 번에 가져올 페이지 지정
+    </select>
+
+    <insert id="insertCustomers" parameterType="com.example.batch_sample.jobs.task06.Customer">
+        INSERT INTO customer2(name, age, gender) VALUES (#{name}, #{age}, #{gender});
+    </insert>
+</mapper>
