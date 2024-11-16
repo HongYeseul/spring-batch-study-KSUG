@@ -13,7 +13,9 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      name: "JPA_ITEM_WRITER_JOB"
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+      name: "MYBATIS_CHUNK_JOB"
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+mybatis:
+  mapper-locations: classpath:/xml_mybatis/customer.xml
