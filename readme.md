@@ -9,6 +9,7 @@
 - [[4회차] FlatFileItemReader로 단순 파일 읽고, FlatFileItemWriter로 파일에 쓰기](https://yeseul-dev.tistory.com/49)
 - [[5회차] JdbcPagingItemReader로 DB내용을 읽고, JdbcBatchItemWriter로 DB에 쓰기](https://yeseul-dev.tistory.com/56)
 - [[6회차] JpaPagingItemReader로 DB내용을 읽고, JpaItemWriter로 DB에 쓰기](https://yeseul-dev.tistory.com/68)
+- [[7회차] MyBatisPagingItemReader로 DB내용을 읽고, MyBatisItemWriter로 DB에 쓰기](https://yeseul-dev.tistory.com/71)
 
 ## 참고 코드
 
