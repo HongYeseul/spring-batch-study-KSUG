@@ -2,6 +2,8 @@ package com.example.batch_sample.jobs.task07;
 
 import com.example.batch_sample.jobs.task06.Customer;
 import com.example.batch_sample.jobs.task06.CustomerItemProcessor;
+import com.example.batch_sample.jobs.task08.After20YearsItemProcessor;
+import com.example.batch_sample.jobs.task08.LowerCaseItemProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
@@ -16,6 +18,8 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
+import org.springframework.batch.item.support.CompositeItemProcessor;
+import org.springframework.batch.item.support.builder.CompositeItemProcessorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +27,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -62,7 +67,7 @@ public class MyBatisReaderJobConfig {
     public FlatFileItemWriter<Customer> task07customerCursorFlatFileItemWriter() {
         return new FlatFileItemWriterBuilder<Customer>()
                 .name("customerCursorFlatFileItemWriter")
-                .resource(new FileSystemResource("./output/task07_customer_new_v4.csv"))
+                .resource(new FileSystemResource("./output/task08_add20Years_makeLowerCase.csv"))
                 .encoding(ENCODING)
                 .delimited().delimiter("\t")
                 .names("Name", "Age", "Gender")
@@ -73,10 +78,13 @@ public class MyBatisReaderJobConfig {
      * MyBatisWriter
      */
     @Bean
-    public MyBatisBatchItemWriter<Customer> task07mybatisItemWriter() {
-        return new MyBatisBatchItemWriterBuilder<Customer>()
-                .sqlSessionFactory(sqlSessionFactory)
-                .statementId("batch_sample.jobs.insertCustomers")
+    public CompositeItemProcessor<Customer, Customer> compositeItemProcessor() {
+        return new CompositeItemProcessorBuilder<Customer, Customer>()
+                // ItemProcessor가 수행할 순서대로 배열을 만들어 전달
+                .delegates(List.of(
+                        new LowerCaseItemProcessor(),
+                        new After20YearsItemProcessor()
+                ))
                 .build();
     }
 
@@ -87,8 +95,8 @@ public class MyBatisReaderJobConfig {
         return new StepBuilder("customerJdbcCursorStep", jobRepository)
                 .<Customer, Customer>chunk(CHUNK_SIZE, transactionManager)
                 .reader(myBatisItemReader())
-                .processor(new CustomerItemProcessor())
-                .writer(task07mybatisItemWriter())
+                .processor(compositeItemProcessor())
+                .writer(task07customerCursorFlatFileItemWriter())
                 .build();
     }
 
