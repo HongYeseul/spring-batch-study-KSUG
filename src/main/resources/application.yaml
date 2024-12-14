@@ -13,7 +13,7 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      name: "QUERYDSL_PAGING_CHUNK_JOB"
+      name: "MY_BATIS_ITEM_WRITER"
 #  jpa:
 #    hibernate:
 #      ddl-auto: update
